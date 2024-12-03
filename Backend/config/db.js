@@ -15,4 +15,4 @@ async function main(){
     return 'done.';
 }
 
-main().then(console.log).catch(console.error).finally(() => client.close());
+export default main().then(console.log).catch(console.error).finally(() => client.close());

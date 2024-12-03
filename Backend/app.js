@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import router from "./routes/userRoutes.js";
+import db from "./config/db.js";
 
 const app = express();
 
