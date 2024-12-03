@@ -1,18 +1,23 @@
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
 const uri = process.env.DATABASE_URI;
-const client = new MongoClient(uri);
-const dbName = 'chat-app'
 
-async function main(){
-    await client.connect();
-    console.log("Connected Successfully to MongoDB Server!");
-    const db = client.db(dbName);
-    const collection = db.collection('users');
-
-    return 'done.';
+export const connectToDatabase = async () => {
+    try{
+        await mongoose.connect(uri);
+        console.log('Connected to MongoDB server!');
+    }catch(err){
+        console.error(err);
+    }
 }
 
-export default main().then(console.log).catch(console.error).finally(() => client.close());
+export const disconnectFromDatabase = async () => {
+    try{
+        await mongoose.disconnect();
+        console.error("Disconnected from MongoDB server!");
+    }catch(err){
+        console.log(err);
+    }
+}
